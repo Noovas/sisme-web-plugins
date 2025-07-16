@@ -58,6 +58,16 @@ class Sisme_Admin {
     }
     
     public function display_admin_page() {
+        $current_module = isset($_GET['module']) ? sanitize_text_field($_GET['module']) : '';
+        
+        if ($current_module && isset($this->modules[$current_module])) {
+            $this->display_module_settings_page($current_module);
+        } else {
+            $this->display_dashboard();
+        }
+    }
+    
+    private function display_dashboard() {
         ?>
         <div class="wrap">
             <div class="sisme-container">
@@ -67,6 +77,32 @@ class Sisme_Admin {
                 <div class="sisme-grid sisme-grid-3">
                     <?php $this->display_modules(); ?>
                 </div>
+            </div>
+        </div>
+        <?php
+    }
+    
+    private function display_module_settings_page($module_name) {
+        $module_instance = $this->modules[$module_name];
+        $module_info = $this->get_module_info($module_instance);
+        
+        ?>
+        <div class="wrap">
+            <div class="sisme-container">
+                <div class="sisme-breadcrumb">
+                    <a href="<?php echo admin_url('admin.php?page=sisme-web-plugins'); ?>">Sisme Web Plugins</a>
+                    <span class="sisme-breadcrumb-separator">›</span>
+                    <span><?php echo esc_html($module_info['name']); ?></span>
+                </div>
+                
+                <h1><?php echo esc_html($module_info['name']); ?></h1>
+                <p><?php echo esc_html($module_info['description']); ?></p>
+                
+                <?php
+                // Permettre aux modules d'afficher leurs paramètres
+                $content = apply_filters('sisme_admin_display_module_settings', '', $module_name);
+                echo $content;
+                ?>
             </div>
         </div>
         <?php

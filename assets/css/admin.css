@@ -5,6 +5,28 @@
  * @system Composants réutilisables
  */
 
+/* === NAVIGATION === */
+
+.sisme-breadcrumb {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.sisme-breadcrumb a {
+    color: #0073aa;
+    text-decoration: none;
+}
+
+.sisme-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.sisme-breadcrumb-separator {
+    margin: 0 8px;
+    color: #999;
+}
+
 /* === CONTAINERS === */
 
 .sisme-container {
