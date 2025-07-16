@@ -19,6 +19,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* Empêcher double-tap zoom sur tous les éléments */
+    touch-action: manipulation;
 }
 
 body {
@@ -31,6 +33,16 @@ body {
     align-items: center;
     justify-content: center;
     padding: 20px;
+    /* Désactiver zoom iOS sur toute la page */
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* Empêcher double-tap zoom spécifiquement */
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
 }
 
 /* Container principal - restructuré */
@@ -56,7 +68,7 @@ body {
 }
 
 .maintenance-logo img {
-    max-width: 100%;
+    max-width: 120px;
     height: auto;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);

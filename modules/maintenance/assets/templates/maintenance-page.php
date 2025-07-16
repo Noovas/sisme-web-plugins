@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 <html <?php language_attributes(); ?>>
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
     <meta name="robots" content="noindex, nofollow">
     <title><?php echo esc_html($settings['title']); ?></title>
     <link rel="stylesheet" href="<?php echo SISME_PLUGIN_URL; ?>modules/maintenance/assets/css/maintenance-styles.css">
