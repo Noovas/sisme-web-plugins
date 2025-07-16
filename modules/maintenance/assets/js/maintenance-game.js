@@ -1,5 +1,5 @@
 /**
- * Logique complète du mini-jeu de maintenance
+ * Logique complète du mini-jeu de maintenance - AVEC EFFICACITÉ PASSIF
  * 
  * @file maintenance-game.js
  */
@@ -27,8 +27,10 @@ let generatorBasePrice = 100;
 // Shop Prestige
 let boostEvolutionLevel = 1;
 let robotEvolutionLevel = 1;
+let passiveEvolutionLevel = 1; // NOUVEAU : Efficacité Sisme Flouze passif
 let boostEvolutionPrice = 1;
 let robotEvolutionPrice = 1;
+let passiveEvolutionPrice = 1; // NOUVEAU : Prix évolution passif
 
 // Constantes
 const baseBoostPower = 0.5;
@@ -70,19 +72,23 @@ function boostMaintenance() {
 function autoProgress() {
     if (!isRunning) return;
     
-    // Vitesse totale = (base + robots) × boost × bonus prestige
-    const totalSpeed = (baseSpeed + robotSpeed) * boostFactor * (1 + prestigeLevel * 0.1);
+    // Vitesse totale = (base + robots) × boost (SANS bonus prestige automatique)
+    const totalSpeed = (baseSpeed + robotSpeed) * boostFactor;
     progress += totalSpeed / 10; // Divisé par 10 pour fluidité (appelé 10x plus souvent)
     
     updateDisplay();
     checkPrestige();
 }
 
-// Génération passive de Flouze
+// Génération passive de Flouze - AVEC EFFICACITÉ PASSIF
 function generatePassiveFlouze() {
     if (!isRunning || flouzePerSecond <= 0) return;
     
-    sismeFlouze += flouzePerSecond;
+    // Calcul avec efficacité passif (coefficient 100% = doubler)
+    const passiveEfficiency = 1 + (passiveEvolutionLevel - 1) * 1.0; // 100% par niveau
+    const effectiveFlouzePerSecond = flouzePerSecond * passiveEfficiency;
+    
+    sismeFlouze += effectiveFlouzePerSecond;
     updateDisplay();
 }
 
@@ -108,7 +114,7 @@ function checkPrestige() {
 // Mise à jour complète de l'affichage
 function updateDisplay() {
     const displayProgress = Math.min(progress, 100);
-    const totalSpeed = (baseSpeed + robotSpeed) * boostFactor * (1 + prestigeLevel * 0.1);
+    const totalSpeed = (baseSpeed + robotSpeed) * boostFactor; // SANS bonus prestige
     const speedPercent = (totalSpeed).toFixed(3);
     
     // Barre de progression
@@ -130,7 +136,13 @@ function updateDisplay() {
     if (prestigeEl) prestigeEl.textContent = prestigeLevel;
     if (prestigePointsEl) prestigePointsEl.textContent = formatNumber(prestigePoints);
     if (flouzeEl) flouzeEl.textContent = formatNumber(sismeFlouze);
-    if (flouzePerSecEl) flouzePerSecEl.textContent = formatNumber(flouzePerSecond);
+    
+    // Affichage Flouze/sec avec efficacité passif
+    if (flouzePerSecEl) {
+        const passiveEfficiency = 1 + (passiveEvolutionLevel - 1) * 1.0;
+        const effectiveFlouzePerSecond = flouzePerSecond * passiveEfficiency;
+        flouzePerSecEl.textContent = formatNumber(effectiveFlouzePerSecond);
+    }
     
     // Shop
     updateShopDisplay();
@@ -159,13 +171,17 @@ function updateShopDisplay() {
     // Prestige
     const boostEvolutionLevelEl = document.getElementById('boostEvolutionLevel');
     const robotEvolutionLevelEl = document.getElementById('robotEvolutionLevel');
+    const passiveEvolutionLevelEl = document.getElementById('passiveEvolutionLevel'); // NOUVEAU
     const boostEvolutionPriceEl = document.getElementById('boostEvolutionPrice');
     const robotEvolutionPriceEl = document.getElementById('robotEvolutionPrice');
+    const passiveEvolutionPriceEl = document.getElementById('passiveEvolutionPrice'); // NOUVEAU
     
     if (boostEvolutionLevelEl) boostEvolutionLevelEl.textContent = boostEvolutionLevel;
     if (robotEvolutionLevelEl) robotEvolutionLevelEl.textContent = robotEvolutionLevel;
+    if (passiveEvolutionLevelEl) passiveEvolutionLevelEl.textContent = passiveEvolutionLevel; // NOUVEAU
     if (boostEvolutionPriceEl) boostEvolutionPriceEl.textContent = boostEvolutionPrice;
     if (robotEvolutionPriceEl) robotEvolutionPriceEl.textContent = robotEvolutionPrice;
+    if (passiveEvolutionPriceEl) passiveEvolutionPriceEl.textContent = passiveEvolutionPrice; // NOUVEAU
     
     // Activer/désactiver boutons
     const buyBoostBtn = document.getElementById('buyBoost');
@@ -173,12 +189,14 @@ function updateShopDisplay() {
     const buyGeneratorBtn = document.getElementById('buyGenerator');
     const buyBoostEvolutionBtn = document.getElementById('buyBoostEvolution');
     const buyRobotEvolutionBtn = document.getElementById('buyRobotEvolution');
+    const buyPassiveEvolutionBtn = document.getElementById('buyPassiveEvolution'); // NOUVEAU
     
     if (buyBoostBtn) buyBoostBtn.disabled = sismeFlouze < getBoostPrice();
     if (buyRobotBtn) buyRobotBtn.disabled = sismeFlouze < getRobotPrice();
     if (buyGeneratorBtn) buyGeneratorBtn.disabled = sismeFlouze < getGeneratorPrice();
     if (buyBoostEvolutionBtn) buyBoostEvolutionBtn.disabled = prestigePoints < boostEvolutionPrice;
     if (buyRobotEvolutionBtn) buyRobotEvolutionBtn.disabled = prestigePoints < robotEvolutionPrice;
+    if (buyPassiveEvolutionBtn) buyPassiveEvolutionBtn.disabled = prestigePoints < passiveEvolutionPrice; // NOUVEAU
 }
 
 /**
@@ -265,6 +283,20 @@ function buyRobotEvolution() {
         
         updateDisplay();
         showPurchaseEffect('🤖⭐');
+    }
+}
+
+// NOUVEAU : Acheter évolution passif
+function buyPassiveEvolution() {
+    if (prestigePoints >= passiveEvolutionPrice) {
+        prestigePoints -= passiveEvolutionPrice;
+        passiveEvolutionLevel++;
+        passiveEvolutionPrice = Math.floor(passiveEvolutionPrice * 1.5);
+        
+        // Pas besoin de recalculer ici, c'est fait dans generatePassiveFlouze()
+        
+        updateDisplay();
+        showPurchaseEffect('💎⭐');
     }
 }
 
@@ -433,6 +465,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const buyGeneratorBtn = document.getElementById('buyGenerator');
     const buyBoostEvolutionBtn = document.getElementById('buyBoostEvolution');
     const buyRobotEvolutionBtn = document.getElementById('buyRobotEvolution');
+    const buyPassiveEvolutionBtn = document.getElementById('buyPassiveEvolution'); // NOUVEAU
     
     if (boostBtn) boostBtn.addEventListener('click', boostMaintenance);
     if (buyBoostBtn) buyBoostBtn.addEventListener('click', buyBoost);
@@ -440,6 +473,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (buyGeneratorBtn) buyGeneratorBtn.addEventListener('click', buyGenerator);
     if (buyBoostEvolutionBtn) buyBoostEvolutionBtn.addEventListener('click', buyBoostEvolution);
     if (buyRobotEvolutionBtn) buyRobotEvolutionBtn.addEventListener('click', buyRobotEvolution);
+    if (buyPassiveEvolutionBtn) buyPassiveEvolutionBtn.addEventListener('click', buyPassiveEvolution); // NOUVEAU
     
     // Event listeners pour les onglets
     const tabs = document.querySelectorAll('.tab');
@@ -467,5 +501,8 @@ function debugGame() {
     console.log('Boosts:', boostOwned);
     console.log('Robots:', robotOwned);
     console.log('Generators:', generatorOwned);
-    console.log('Speed:', (baseSpeed + robotSpeed) * boostFactor * (1 + prestigeLevel * 0.1));
+    console.log('Passive Evolution Level:', passiveEvolutionLevel);
+    console.log('Speed:', (baseSpeed + robotSpeed) * boostFactor); // SANS bonus prestige
+    const passiveEfficiency = 1 + (passiveEvolutionLevel - 1) * 1.0;
+    console.log('Passive Efficiency:', passiveEfficiency + 'x');
 }
