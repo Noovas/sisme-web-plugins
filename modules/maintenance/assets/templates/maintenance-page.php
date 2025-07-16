@@ -26,7 +26,9 @@ if (!defined('ABSPATH')) {
         <div class="maintenance-main">
             <?php if (!empty($settings['logo_url'])): ?>
                 <div class="maintenance-logo">
-                    <img src="<?php echo esc_url($settings['logo_url']); ?>" alt="<?php bloginfo('name'); ?>">
+                    <a href="https://sisme.fr" target="_blank" rel="noopener">
+                        <img src="<?php echo esc_url($settings['logo_url']); ?>" alt="<?php bloginfo('name'); ?>">
+                    </a>
                 </div>
             <?php endif; ?>
             
@@ -45,8 +47,7 @@ if (!defined('ABSPATH')) {
             <?php endif; ?>
             
             <div class="maintenance-contact">
-                <strong>💬 Besoin d'aide ?</strong><br>
-                Contactez-nous à : <?php echo antispambot(get_option('admin_email')); ?>
+                <strong>💬 Pour plus d'informations contactez Digne@Bloc</strong>
             </div>
             
             <!-- Barre de progression repositionnée APRÈS le contact -->
