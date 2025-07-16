@@ -1,0 +1,383 @@
+/**
+ * Styles ultra-compacts pour la page de maintenance
+ * 
+ * @file maintenance-styles.css
+ */
+
+/* Variables CSS */
+:root {
+    --maintenance-bg: #f8f9fa;
+    --maintenance-text: #333333;
+    --sisme-green: #ACBCA0;
+    --sisme-orange: #D4A374;
+}
+
+/* Reset et base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--maintenance-bg);
+    color: var(--maintenance-text);
+    line-height: 1.4;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+/* Container principal */
+.maintenance-container {
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Logo */
+.maintenance-logo {
+    margin-bottom: 15px;
+}
+
+.maintenance-logo img {
+    max-width: 120px;
+    height: auto;
+    border-radius: 6px;
+}
+
+/* Textes */
+.maintenance-title {
+    font-size: 1.8rem;
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+.maintenance-message {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+/* Barre de progression ultra-compacte */
+.maintenance-progress {
+    width: 100%;
+    height: 8px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+    margin: 15px 0;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.maintenance-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--sisme-green), var(--sisme-orange));
+    border-radius: 4px;
+    transition: width 0.1s linear;
+    position: relative;
+}
+
+.progress-percentage {
+    position: absolute;
+    top: -18px;
+    right: 0;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: var(--sisme-green);
+}
+
+/* Jeu ultra-compact */
+.game-compact {
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 15px;
+    margin: 15px 0;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Stats en grille 3x2 très compacte */
+.stats-compact {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 12px;
+    font-size: 0.75rem;
+}
+
+.stat {
+    background: rgba(255,255,255,0.1);
+    padding: 4px 6px;
+    border-radius: 8px;
+    white-space: nowrap;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.stat.flouze {
+    background: rgba(212, 163, 116, 0.2);
+    color: var(--sisme-orange);
+    border-color: var(--sisme-orange);
+}
+
+.stat.prestige {
+    background: rgba(255, 215, 0, 0.2);
+    color: #FFD700;
+    border-color: #FFD700;
+}
+
+/* Bouton de clic compact */
+.click-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(45deg, var(--sisme-green), var(--sisme-orange));
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin: 12px 0;
+    transition: transform 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.click-btn:hover {
+    transform: scale(1.1);
+}
+
+.click-btn:active {
+    transform: scale(0.9);
+}
+
+.btn-mobile {
+    display: none;
+}
+
+/* Onglets compacts */
+.tabs {
+    display: flex;
+    margin: 12px 0 8px 0;
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.tab {
+    flex: 1;
+    padding: 8px 12px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    color: var(--maintenance-text);
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.tab.active {
+    background: var(--sisme-green);
+    color: white;
+}
+
+.tab:hover:not(.active) {
+    background: rgba(255,255,255,0.1);
+}
+
+/* Contenu des onglets */
+.tab-content {
+    display: none;
+    min-height: 90px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Shop ultra-compact */
+.shop-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 8px;
+    margin: 4px 0;
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    font-size: 0.7rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: background 0.3s ease;
+}
+
+.shop-item:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+.item-info {
+    flex: 1;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 8px;
+}
+
+.buy-btn {
+    background: linear-gradient(45deg, var(--sisme-green), var(--sisme-orange));
+    border: none;
+    border-radius: 12px;
+    padding: 4px 8px;
+    color: white;
+    font-size: 0.65rem;
+    font-weight: bold;
+    cursor: pointer;
+    min-width: 42px;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.buy-btn:hover {
+    transform: scale(1.05);
+}
+
+.buy-btn:active {
+    transform: scale(0.95);
+}
+
+.buy-btn:disabled {
+    background: #666;
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.prestige-btn {
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    color: #333;
+}
+
+.prestige-btn:hover {
+    background: linear-gradient(45deg, #FFA500, #FFD700);
+}
+
+/* Info de fin */
+.maintenance-countdown {
+    background: rgba(172, 188, 160, 0.2);
+    border-radius: 8px;
+    padding: 12px;
+    margin-top: 15px;
+    border: 1px solid var(--sisme-green);
+    font-size: 0.85rem;
+}
+
+.maintenance-countdown strong {
+    color: var(--sisme-green);
+}
+
+.maintenance-contact {
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(212, 163, 116, 0.2);
+    border-radius: 8px;
+    border: 1px solid var(--sisme-orange);
+    font-size: 0.8rem;
+    color: var(--sisme-orange);
+}
+
+/* Responsive mobile */
+@media (max-width: 768px) {
+    .maintenance-container {
+        padding: 0 10px;
+        max-width: 350px;
+    }
+    
+    .maintenance-title {
+        font-size: 1.5rem;
+    }
+    
+    .maintenance-message {
+        font-size: 0.9rem;
+    }
+    
+    .maintenance-logo img {
+        max-width: 100px;
+    }
+    
+    .stats-compact {
+        font-size: 0.7rem;
+        gap: 4px;
+    }
+    
+    .stat {
+        padding: 3px 4px;
+    }
+    
+    .click-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+    
+    .btn-desktop {
+        display: none;
+    }
+    
+    .btn-mobile {
+        display: inline-block;
+    }
+    
+    .tab {
+        padding: 6px 8px;
+        font-size: 0.75rem;
+    }
+    
+    .shop-item {
+        padding: 5px 6px;
+        font-size: 0.65rem;
+    }
+    
+    .buy-btn {
+        padding: 3px 6px;
+        font-size: 0.6rem;
+        min-width: 38px;
+    }
+    
+    .maintenance-countdown,
+    .maintenance-contact {
+        padding: 8px;
+        font-size: 0.75rem;
+    }
+}
+
+/* Animations */
+@keyframes flouzeGain {
+    0% { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+    100% { 
+        opacity: 0; 
+        transform: translateY(-25px); 
+    }
+}
+
+@keyframes particleFade {
+    0% { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    }
+    100% { 
+        opacity: 0; 
+        transform: translateY(-60px) scale(0.5); 
+    }
+}
+
+/* États de chargement */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
