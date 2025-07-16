@@ -194,11 +194,11 @@ if (!defined('ABSPATH')) {
         <?php endif; ?>
         
         <h1 class="maintenance-title">
-            <?php echo esc_html($settings['title']); ?>
+            <?php echo wp_unslash(esc_html($settings['title'])); ?>
         </h1>
         
         <div class="maintenance-message">
-            <?php echo nl2br(esc_html($settings['message'])); ?>
+            <?php echo wp_unslash(nl2br(esc_html($settings['message']))); ?>
         </div>
         
         <!-- Barre de progression décorative -->

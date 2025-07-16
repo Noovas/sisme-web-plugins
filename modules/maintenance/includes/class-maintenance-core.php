@@ -128,8 +128,8 @@ class Sisme_Maintenance_Core {
                     </div>
                 <?php endif; ?>
                 
-                <h1 class="maintenance-title"><?php echo esc_html($settings['title']); ?></h1>
-                <div class="maintenance-message"><?php echo wpautop(esc_html($settings['message'])); ?></div>
+                <h1 class="maintenance-title"><?php echo wp_unslash(esc_html($settings['title'])); ?></h1>
+                <div class="maintenance-message"><?php echo wp_unslash(wpautop(esc_html($settings['message']))); ?></div>
                 
                 <?php if (!empty($settings['end_date'])): ?>
                     <div class="maintenance-countdown">
