@@ -1,0 +1,247 @@
+/**
+ * CSS modulaire pour l'administration Sisme Web Plugins
+ * 
+ * @file assets/css/admin.css
+ * @system Composants réutilisables
+ */
+
+/* === CONTAINERS === */
+
+.sisme-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.sisme-section {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+}
+
+.sisme-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.sisme-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.sisme-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.sisme-grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 768px) {
+    .sisme-grid-2,
+    .sisme-grid-3,
+    .sisme-grid-4 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* === CARDS === */
+
+.sisme-card {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.sisme-card:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.sisme-card-header {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.sisme-card-title {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.sisme-card-description {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.sisme-card-footer {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+/* === FORMS === */
+
+.sisme-form-group {
+    margin-bottom: 20px;
+}
+
+.sisme-form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #23282d;
+}
+
+.sisme-form-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.sisme-form-textarea {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    min-height: 80px;
+    resize: vertical;
+}
+
+.sisme-form-select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    background: #fff;
+}
+
+/* === BUTTONS === */
+
+.sisme-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.sisme-btn-primary {
+    background: #0073aa;
+    color: #fff;
+}
+
+.sisme-btn-primary:hover {
+    background: #005a87;
+    color: #fff;
+}
+
+.sisme-btn-secondary {
+    background: #f1f1f1;
+    color: #333;
+}
+
+.sisme-btn-secondary:hover {
+    background: #ddd;
+    color: #333;
+}
+
+.sisme-btn-danger {
+    background: #dc3232;
+    color: #fff;
+}
+
+.sisme-btn-danger:hover {
+    background: #a00;
+    color: #fff;
+}
+
+.sisme-btn-group {
+    display: flex;
+    gap: 10px;
+}
+
+/* === ALERTS === */
+
+.sisme-alert {
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.sisme-alert-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.sisme-alert-error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.sisme-alert-warning {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.sisme-alert-info {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+/* === STATES === */
+
+.sisme-active {
+    border-left: 4px solid #46b450;
+}
+
+.sisme-inactive {
+    border-left: 4px solid #ccc;
+    opacity: 0.7;
+}
+
+.sisme-loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* === UTILITIES === */
+
+.sisme-text-center { text-align: center; }
+.sisme-text-right { text-align: right; }
+.sisme-text-left { text-align: left; }
+
+.sisme-mb-0 { margin-bottom: 0; }
+.sisme-mb-10 { margin-bottom: 10px; }
+.sisme-mb-20 { margin-bottom: 20px; }
+
+.sisme-mt-0 { margin-top: 0; }
+.sisme-mt-10 { margin-top: 10px; }
+.sisme-mt-20 { margin-top: 20px; }
+
+.sisme-hidden { display: none; }
+.sisme-visible { display: block; }
+
+/* === RESPONSIVE === */
+
+@media (max-width: 600px) {
+    .sisme-container {
+        padding: 10px;
+    }
+    
+    .sisme-section {
+        padding: 15px;
+    }
+    
+    .sisme-btn-group {
+        flex-direction: column;
+    }
+}
