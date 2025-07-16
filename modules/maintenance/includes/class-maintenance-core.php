@@ -182,7 +182,7 @@ class Sisme_Maintenance_Core {
         // Validation
         $new_settings['active'] = !empty($new_settings['active']);
         $new_settings['title'] = sanitize_text_field($new_settings['title']);
-        $new_settings['message'] = sanitize_textarea_field($new_settings['message']);
+        $new_settings['message'] = sanitize_textarea_field(wp_unslash($new_settings['message']));
         $new_settings['background_color'] = sanitize_hex_color($new_settings['background_color']);
         $new_settings['text_color'] = sanitize_hex_color($new_settings['text_color']);
         $new_settings['logo_url'] = esc_url_raw($new_settings['logo_url']);
