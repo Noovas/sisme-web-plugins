@@ -386,11 +386,47 @@ function formatNumber(num) {
 }
 
 /**
+ * === GESTION DU TOGGLE JEU ===
+ */
+
+function toggleGame() {
+    const gameContainer = document.getElementById('gameContainer');
+    const toggleBtn = document.getElementById('toggleGame');
+    
+    if (!gameContainer || !toggleBtn) return;
+    
+    if (gameContainer.classList.contains('hidden')) {
+        // Afficher le jeu
+        gameContainer.classList.remove('hidden');
+        gameContainer.classList.add('show');
+        toggleBtn.textContent = '🎮 Masquer le jeu';
+        toggleBtn.classList.add('active');
+        
+        // Démarrer le jeu si pas déjà fait
+        if (!isRunning) {
+            isRunning = true;
+        }
+    } else {
+        // Masquer le jeu
+        gameContainer.classList.add('hidden');
+        gameContainer.classList.remove('show');
+        toggleBtn.textContent = '🎮 Patienter en jouant';
+        toggleBtn.classList.remove('active');
+    }
+}
+
+/**
  * === INITIALISATION ===
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Event listeners pour les boutons
+    // Event listener pour le toggle du jeu
+    const toggleBtn = document.getElementById('toggleGame');
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', toggleGame);
+    }
+    
+    // Event listeners pour les boutons de jeu
     const boostBtn = document.getElementById('boostBtn');
     const buyBoostBtn = document.getElementById('buyBoost');
     const buyRobotBtn = document.getElementById('buyRobot');

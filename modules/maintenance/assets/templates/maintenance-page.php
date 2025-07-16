@@ -42,8 +42,23 @@ if (!defined('ABSPATH')) {
             </div>
         </div>
         
-        <!-- Jeu ultra-compact -->
-        <div class="game-compact">
+        <?php if (!empty($settings['end_date'])): ?>
+            <div class="maintenance-countdown">
+                <strong>🔧 Retour prévu le : <?php echo date('d/m/Y à H:i', strtotime($settings['end_date'])); ?></strong>
+            </div>
+        <?php endif; ?>
+        
+        <div class="maintenance-contact">
+            <strong>💬 Besoin d'aide ?</strong><br>
+            Contactez-nous à : <?php echo antispambot(get_option('admin_email')); ?>
+        </div>
+        
+        <!-- Mini-jeu discret -->
+        <div class="game-toggle">
+            <button class="game-toggle-btn" id="toggleGame">🎮 Patienter en jouant</button>
+        </div>
+        
+        <div class="game-compact hidden" id="gameContainer">
             <!-- Stats en grille 3x2 -->
             <div class="stats-compact">
                 <div class="stat flouze">💰 <span id="flouzeValue">0</span></div>
@@ -93,17 +108,6 @@ if (!defined('ABSPATH')) {
                     <button class="buy-btn prestige-btn" id="buyRobotEvolution">⭐<span id="robotEvolutionPrice">1</span></button>
                 </div>
             </div>
-        </div>
-        
-        <?php if (!empty($settings['end_date'])): ?>
-            <div class="maintenance-countdown">
-                <strong>🔧 Retour prévu le : <?php echo date('d/m/Y à H:i', strtotime($settings['end_date'])); ?></strong>
-            </div>
-        <?php endif; ?>
-        
-        <div class="maintenance-contact">
-            <strong>💬 Besoin d'aide ?</strong><br>
-            Contactez-nous à : <?php echo antispambot(get_option('admin_email')); ?>
         </div>
     </div>
     

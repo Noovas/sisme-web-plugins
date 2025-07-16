@@ -92,13 +92,50 @@ body {
     color: var(--sisme-green);
 }
 
-/* Jeu ultra-compact */
+/* Jeu isolé et masquable */
+.game-toggle {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.game-toggle-btn {
+    background: rgba(172, 188, 160, 0.2);
+    border: 1px solid var(--sisme-green);
+    border-radius: 20px;
+    padding: 8px 16px;
+    color: var(--sisme-green);
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.game-toggle-btn:hover {
+    background: rgba(172, 188, 160, 0.3);
+    transform: translateY(-1px);
+}
+
+.game-toggle-btn.active {
+    background: var(--sisme-green);
+    color: white;
+}
+
+/* Jeu compact mais isolé */
 .game-compact {
-    background: rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.03);
     border-radius: 12px;
-    padding: 15px;
+    padding: 12px;
     margin: 15px 0;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.game-compact.hidden {
+    display: none;
+}
+
+.game-compact.show {
+    animation: slideDown 0.3s ease-out;
 }
 
 /* Stats en grille 3x2 très compacte */
@@ -354,6 +391,19 @@ body {
 }
 
 /* Animations */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        max-height: 300px;
+        transform: translateY(0);
+    }
+}
+
 @keyframes flouzeGain {
     0% { 
         opacity: 1; 
